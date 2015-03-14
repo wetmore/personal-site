@@ -208,8 +208,10 @@ function CodeBlock(s, attr)
     return '<img src="data:image/png;base64,' .. png .. '"/>'
   -- otherwise treat as code (one could pipe through a highlighter)
   else
-    return "<pre><code" .. attributes(attr) .. ">" .. escape(s) ..
-           "</code></pre>"
+    local hilighted = pipe("pygmentize -f html -l " .. attr.class, s)
+    return hilighted
+    --return "<pre><code" .. attributes(attr) .. ">" .. escape(s) ..
+    --       "</code></pre>"
   end
 end
 

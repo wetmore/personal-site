@@ -58,6 +58,8 @@ div.info {
 .sidenote {
   position: absolute;
   margin-left: 630px;
+  font-size: 0.8em;
+  color: #333;
 }
 
 .caption {
@@ -67,4 +69,14 @@ div.info {
 .captioned-image img {
     margin: 0 auto 0 auto;
     display: block;
+}
+
+.highlight {
+    margin: 0 20px 0 20px;
+    padding: 10px;
+    background: #eee;
+}
+
+.highlight pre {
+    margin: 0;
 }
