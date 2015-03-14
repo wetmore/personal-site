@@ -309,6 +309,16 @@ function Div(s, attr)
   return "<div" .. attributes(attr) .. ">\n" .. s .. "</div>"
 end
 
+function CaptionedImage(src, tit, txt)
+  local content = '<img src="' .. src .. '" alt="' .. txt .. '">'
+  content = content .. '<p class="caption">' .. tit .. '</p>'
+  return '<div class="captioned-image">' .. content .. '</div>'
+end
+
+function RawBlock(format, s)
+  return s
+end
+
 -- The following code will produce runtime warnings when you haven't defined
 -- all of the functions you need for the custom writer, so it's useful
 -- to include when you're working on a writer.

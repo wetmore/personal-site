@@ -59,3 +59,12 @@ div.info {
   position: absolute;
   margin-left: 630px;
 }
+
+.caption {
+    display: none;
+}
+
+.captioned-image img {
+    margin: 0 auto 0 auto;
+    display: block;
+}
