@@ -123,13 +123,6 @@ h2 {
     font-size: 0.8em
 }
 
-header {
-    margin-bottom: 4em;
-    padding: 150px 0;
-    border-bottom: 1px solid #dfdfdf;
-    text-align: center
-}
-
 header .title {
     font-family: "nevis";
     font-size: 2.3em;

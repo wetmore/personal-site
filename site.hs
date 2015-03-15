@@ -101,8 +101,8 @@ customWriterCompilerWith :: (WriterOptions -> Pandoc -> IO String)
                          -> ReaderOptions -> WriterOptions
                          -> Compiler (Item String)
 customWriterCompilerWith customWriter ropt wopt = do
-    body <- getResourceBody
-    withItemBody (unsafeCompiler . customWriter wopt) $ readPandocWith ropt body
+    pandoc <- readPandocWith ropt <$> getResourceBody
+    withItemBody (unsafeCompiler . customWriter wopt) pandoc
 
 customWriterCompilerWith' :: (WriterOptions -> Pandoc -> IO String)
                          -> ReaderOptions -> WriterOptions
@@ -112,5 +112,7 @@ customWriterCompilerWith' customWriter ropt wopt =
         >>= withItemBody (unsafeCompiler . customWriter wopt)
 
 
+
+--------------------------------------------------------------------------------
 
     

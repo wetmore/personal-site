@@ -14,15 +14,29 @@ body {
 }
 
 header {
-    border-bottom: 2px solid black;
-    margin-bottom: 30px;
-    padding: 12px 0px 12px 0px;
+  margin-bottom: 4em;
+  padding: 40px 0 60px 0;
+  border-bottom: 1px solid #575757;
+  text-align: center;
 }
 
 header .navi a {
     color: black;
     margin-left: 12px;
     text-decoration: none;
+}
+
+header .bird {
+  background-image: url(/images/bird.png);
+  width: 90px;
+  height: 90px;
+  background-size: 100%;
+  margin-top: 45px;
+  position: absolute;
+  left: 50%;
+  margin-left: -45px;
+  top: 84px;
+  background-color: white;
 }
 
 div#footer {
@@ -46,7 +60,7 @@ div.info {
     color: #555;
     font-size: 14px;
     font-style: italic;
-    margin: 0 auto 0 auto;
+    text-align: center;    
 }
 
 .sidenote {
