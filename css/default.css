@@ -1,9 +1,16 @@
+html {
+    border-top: 8px solid #333;
+}
+
 body {
     color: black;
-    font-size: 16px;
     margin: 0px auto 0px auto;
     width: 600px;
+    font-family: "sorts-mill-goudy";
+    font-size: 1.1em;
+    color: #333
 }
+
 
 div#header {
     border-bottom: 2px solid black;

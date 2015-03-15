@@ -24,6 +24,10 @@ main = hakyll $ do
         route   idRoute
         compile copyFileCompiler
 
+    match "font/*" $ do
+        route   idRoute
+        compile copyFileCompiler
+
     match (fromList ["about.rst", "contact.markdown"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
