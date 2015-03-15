@@ -78,12 +78,6 @@
 }
 */
 
-@media only screen and (max-width: 1000px) {
-    body {
-        font-size:0.9em
-    }
-}
-
 em {
     font-style: normal;
     font-family: "sorts-mill-goudy-italic"

@@ -39,7 +39,7 @@ header .bird {
   background-color: white;
 }
 
-div#footer {
+#footer {
     border-top: solid 2px black;
     color: #555;
     font-size: 12px;
@@ -56,28 +56,11 @@ h2 {
     font-size: 20px;
 }
 
-div.info {
+.info {
     color: #555;
     font-size: 14px;
     font-style: italic;
     text-align: center;    
-}
-
-.sidenote {
-  position: absolute;
-  margin-left: 630px;
-  font-size: 0.8em;
-  color: #333;
-}
-
-.footnotes {
-  font-size: 0.8em;
-  color: #333;
-}
-
-.sidenote p {
-    margin: 5px 0 5px 0;
-    padding-right: 20px;
 }
 
 .caption {
@@ -99,20 +82,56 @@ div.info {
     margin: 0;
 }
 
+.main-text {
+    margin-left: -220px;
+    width: 700px;
+}
+
+.sidenote {
+  position: absolute;
+  margin-left: 730px;
+  font-size: 0.8em;
+  color: #333;
+}
+
+.sidenote p {
+    margin: 5px 0 5px 0;
+    padding-right: 20px;
+}
+
 .footnotes {
-    display: none;
+  font-size: 0.8em;
+  color: #333;
+  display: none;
 }
 
 /* Medium screens */
-@media only screen and (min-width: 600px) and (max-width: 1200px) {
-    #content {
+@media only screen and (min-width: 850px) and (max-width: 1200px) {
+    .main-text {
         margin-left: -107px;
         width: 600px;
+    }
+
+    .sidenote {
+        margin-left: 580px;
+    }
+}
+
+/* Medium and small */
+@media only screen and (min-width: 0px) and (max-width: 1200px) {
+    header .bird {
+        width: 65px;
+        height: 65px;
+        margin-left: -32.5px;
+    }
+
+    body {
+        font-size: 0.9em;
     }
 }
 
 /* Small screens */
-@media only screen and (min-width: 0px) and (max-width: 600px) {
+@media only screen and (min-width: 0px) and (max-width: 850px) {
     #content {
         padding: 20px;
     }
@@ -126,6 +145,15 @@ div.info {
     }
 
     body {
+        width: 100%;
+    }
+
+    #footer {
+        padding-right: 15px;
+    }
+
+    .main-text {
+        margin-left: 0;
         width: 100%;
     }
 }
