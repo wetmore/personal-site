@@ -9,6 +9,8 @@ import           Text.Pandoc.Writers.Custom
 import           Hakyll.Core.Compiler
 import           Control.Applicative
 
+import qualified CssVars as CV
+
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyll $ do
@@ -18,7 +20,7 @@ main = hakyll $ do
 
     match "css/*" $ do
         route   idRoute
-        compile compressCssCompiler
+        compile $ compressCssCompiler >>= applyAsTemplate CV.defaultCtx
 
     match "js/*" $ do
         route   idRoute
@@ -108,4 +110,7 @@ customWriterCompilerWith' :: (WriterOptions -> Pandoc -> IO String)
 customWriterCompilerWith' customWriter ropt wopt = 
     (readPandocWith ropt <$> getResourceBody)
         >>= withItemBody (unsafeCompiler . customWriter wopt)
+
+
+
     

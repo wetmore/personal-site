@@ -1,6 +1,8 @@
 html {
-    border-top: 8px solid #333;
+    border-top: 8px solid $fstColor$;
 }
+
+/* #40A2F4 */
 
 body {
     color: black;
@@ -8,35 +10,19 @@ body {
     width: 600px;
     font-family: "sorts-mill-goudy";
     font-size: 1.1em;
-    color: #333
+    color: $fstColor$;
 }
 
-
-div#header {
+header {
     border-bottom: 2px solid black;
     margin-bottom: 30px;
     padding: 12px 0px 12px 0px;
 }
 
-div#logo a {
+header .navi a {
     color: black;
-    float: left;
-    font-size: 18px;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-div#header #navigation {
-    text-align: right;
-}
-
-div#header #navigation a {
-    color: black;
-    font-size: 18px;
-    font-weight: bold;
     margin-left: 12px;
     text-decoration: none;
-    text-transform: uppercase;
 }
 
 div#footer {
@@ -49,7 +35,7 @@ div#footer {
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 2em;
 }
 
 h2 {
@@ -60,11 +46,17 @@ div.info {
     color: #555;
     font-size: 14px;
     font-style: italic;
+    margin: 0 auto 0 auto;
 }
 
 .sidenote {
   position: absolute;
   margin-left: 630px;
+  font-size: 0.8em;
+  color: #333;
+}
+
+.footnotes {
   font-size: 0.8em;
   color: #333;
 }
@@ -91,4 +83,35 @@ div.info {
 
 .highlight pre {
     margin: 0;
+}
+
+.footnotes {
+    display: none;
+}
+
+/* Medium screens */
+@media only screen and (min-width: 600px) and (max-width: 1200px) {
+    #content {
+        margin-left: -107px;
+        width: 600px;
+    }
+}
+
+/* Small screens */
+@media only screen and (min-width: 0px) and (max-width: 600px) {
+    #content {
+        padding: 20px;
+    }
+
+    .sidenote {
+        display: none;
+    }
+
+    .footnotes {
+        display: block;
+    }
+
+    body {
+        width: 100%;
+    }
 }

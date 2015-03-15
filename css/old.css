@@ -166,7 +166,7 @@ header .navi ul li a:hover,header .navi ul li a:active {
 }
 
 a {
-    color: red;
+    color: $sndColor$;
     text-decoration: none
 }
 
