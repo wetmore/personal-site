@@ -15,7 +15,7 @@ body {
 
 header {
   margin-bottom: 4em;
-  padding: 40px 0 60px 0;
+  padding: 50px 0 70px 0;
   border-bottom: 1px solid #575757;
   text-align: center;
 }
@@ -31,7 +31,7 @@ header .bird {
   width: 90px;
   height: 90px;
   background-size: 100%;
-  margin-top: 45px;
+  margin-top: 65px;
   position: absolute;
   left: 50%;
   margin-left: -45px;
@@ -78,7 +78,7 @@ div.highlight {
     background: #eee;
 }
 
-code.highlight {
+code {
    background: #eee;
    display: inline-block;
    padding: 2px;
@@ -133,10 +133,15 @@ code.highlight {
 
 /* Medium and small */
 @media only screen and (min-width: 0px) and (max-width: 1200px) {
+    header {
+        padding: 40px 0 60px 0;
+    }
+
     header .bird {
         width: 65px;
         height: 65px;
         margin-left: -32.5px;
+        margin-top: 45px;
     }
 
     body {
