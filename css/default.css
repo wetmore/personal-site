@@ -100,6 +100,10 @@ code.highlight {
   color: #333;
 }
 
+.sidenote ol {
+    margin: 0;
+}
+
 .sidenote p {
     margin: 5px 0 5px 0;
     padding-right: 20px;

@@ -147,7 +147,6 @@ function Code(s, attr)
     hilighted = pipe("pygmentize -f html -l " .. attr.class, s)
     hilighted = string.sub(hilighted, 29)
     hilighted = string.sub(hilighted, 0, -14)
-    print(hilighted)
     attr.class = "highlight"
   end
 
@@ -186,7 +185,7 @@ function Para(s)
   if string.match(s, 'class="fnref"') then
     start = old_notes_size + 1
     for i = #notes, old_notes_size + 1, -1 do
-      footnotes = '<li><div>' .. notes[i][2] .. '</div></li>' .. footnotes
+      footnotes = '<li id="sn' .. i .. '"><div>' .. notes[i][2] .. '</div></li>' .. footnotes
     end
     old_notes_size = #notes
   end
