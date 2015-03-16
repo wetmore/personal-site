@@ -1,5 +1,5 @@
 html {
-    border-top: 8px solid $fstColor$;
+    border-top: 5px solid $fstColor$;
 }
 
 /* #40A2F4 */
@@ -7,7 +7,7 @@ html {
 body {
     color: black;
     margin: 0px auto 0px auto;
-    width: 600px;
+    width: 800px;
     font-family: "sorts-mill-goudy";
     font-size: 1.1em;
     color: $fstColor$;
@@ -40,7 +40,7 @@ header .bird {
 }
 
 #footer {
-    border-top: solid 2px black;
+    border-top: solid 1px black;
     color: #555;
     font-size: 12px;
     margin-top: 30px;
@@ -72,9 +72,13 @@ h2 {
     display: block;
 }
 
-.highlight {
+div.highlight {
     margin: 0 20px 0 20px;
     padding: 10px;
+    background: #eee;
+}
+
+code {
     background: #eee;
 }
 
@@ -83,13 +87,13 @@ h2 {
 }
 
 .main-text {
-    margin-left: -220px;
-    width: 700px;
+    /* margin-left: -220px; */
+    /* width: 700px; */
 }
 
 .sidenote {
   position: absolute;
-  margin-left: 730px;
+  margin-left: 830px;
   font-size: 0.8em;
   color: #333;
 }
@@ -114,6 +118,10 @@ h2 {
 
     .sidenote {
         margin-left: 580px;
+    }
+
+    body {
+        width: 600px;
     }
 }
 

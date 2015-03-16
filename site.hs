@@ -5,7 +5,6 @@ import           Hakyll
 import qualified Data.Set as S
 import           Text.Pandoc
 import           Text.Pandoc.Options
-import           Text.Pandoc.Writers.Custom
 import           Hakyll.Core.Compiler
 import           Control.Applicative
 
@@ -30,7 +29,7 @@ main = hakyll $ do
         route   idRoute
         compile copyFileCompiler
 
-    match (fromList ["about.rst", "contact.markdown"]) $ do
+    match (fromList ["about.md", "contact.md"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
@@ -84,7 +83,7 @@ postCtx =
 pandocMathCompiler :: Compiler (Item String)
 pandocMathCompiler =
     let mathExtensions = [Ext_tex_math_dollars, Ext_tex_math_double_backslash,
-                          Ext_latex_macros]
+                          Ext_latex_macros, Ext_inline_code_attributes]
         defaultExtensions = writerExtensions defaultHakyllWriterOptions
         newExtensions = foldr S.insert defaultExtensions mathExtensions
         writerOptions = defaultHakyllWriterOptions {

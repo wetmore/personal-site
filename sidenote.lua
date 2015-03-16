@@ -141,7 +141,17 @@ function Image(s, src, tit)
 end
 
 function Code(s, attr)
-  return "<code" .. attributes(attr) .. ">" .. escape(s) .. "</code>"
+  local hilighted = escape(s)
+  
+  if attr.class ~= "" then 
+    hilighted = pipe("pygmentize -f html -l " .. attr.class, s)
+    hilighted = string.sub(hilighted, 29)
+    hilighted = string.sub(hilighted, 0, -14)
+    print(hilighted)
+    attr.class = "highlight"
+  end
+
+  return "<code" .. attributes(attr) .. ">" .. hilighted .. "</code>"
 end
 
 function InlineMath(s)
