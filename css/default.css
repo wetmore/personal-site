@@ -78,8 +78,10 @@ div.highlight {
     background: #eee;
 }
 
-code {
-    background: #eee;
+code.highlight {
+   background: #eee;
+   display: inline-block;
+   padding: 2px;
 }
 
 .highlight pre {
