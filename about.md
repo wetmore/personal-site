@@ -10,5 +10,7 @@ I have been working on web development for the past few years. Come October
 2015, I will be working full-time at Google in New York City on
 interactive search features. I interned on the same team in the summer of 2014.
 For more information about my background as a developer, please see my [github 
-account](//github.com/wetmore) or my CV.
+account](//github.com/wetmore) or my [CV](/cv.pdf).
+
+
 

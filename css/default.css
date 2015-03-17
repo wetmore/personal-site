@@ -20,6 +20,10 @@ header {
   text-align: center;
 }
 
+header .navi {
+    margin-left: -10px;
+}
+
 header .navi a {
     color: black;
     margin-left: 12px;
@@ -76,6 +80,7 @@ div.highlight {
     margin: 0 20px 0 20px;
     padding: 10px;
     background: #eee;
+    overflow: auto;
 }
 
 code {

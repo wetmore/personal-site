@@ -1,6 +1,10 @@
-setTimeout(positionSidenotes, 1);
+//setTimeout(positionSidenotes, 1);
 
-window.addListener("resize", positionSidenotes);
+//window.addEventListener("resize", positionSidenotes);
+
+MathJax.Hub.Register.StartupHook("End",function () {
+  positionSidenotes();
+});
 
 function toArray(nodeList) {
   return Array.prototype.slice.apply(nodeList);
@@ -21,7 +25,6 @@ function positionSidenotes() {
 
       if (isStart(noteNum)) { // reposition sidenote
         li.style.marginTop = delta + "px";
-        console.log(delta);
       } else { // reposition li
         li.style.marginTop = delta + "px";
       }
