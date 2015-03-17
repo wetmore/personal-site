@@ -21,7 +21,7 @@ header {
 }
 
 header .navi {
-    margin-left: -10px;
+    margin-left: -12px;
 }
 
 header .navi a {
@@ -53,11 +53,25 @@ header .bird {
 }
 
 h1 {
-    font-size: 2em;
+    margin-top: 2em;
+    font-size: 1.6em;
+    font-weight: normal;
+    font-style: normal;
+    text-align: center
 }
 
 h2 {
-    font-size: 20px;
+    margin-top: 2em;
+    font-size: 1.3em;
+    font-weight: bold;
+    font-style: normal
+}
+
+h3 {
+    margin-top: 1em;
+    font-size: 1.1em;
+    font-weight: bold;
+    font-style: normal
 }
 
 .info {
@@ -118,6 +132,11 @@ code {
   font-size: 0.8em;
   color: #333;
   display: none;
+}
+
+ul.posts {
+    list-style: none;
+    padding-left: 0;
 }
 
 /* Medium screens */

@@ -83,21 +83,6 @@ em {
     font-family: "sorts-mill-goudy-italic"
 }
 
-h1 {
-    margin-top: 2em;
-    font-size: 1.4em;
-    font-weight: normal;
-    font-style: normal;
-    text-align: center
-}
-
-h2 {
-    margin-top: 2em;
-    font-size: 1.1em;
-    font-weight: bold;
-    font-style: normal
-}
-
 .wrap {
     margin: 0 auto;
     width: 45%
@@ -164,81 +149,6 @@ a:hover {
 blockquote {
     font-family: "sorts-mill-goudy-italic";
     font-size: 1em
-}
-
-article {
-    margin-bottom: 8em;
-    padding: 0;
-    font-size: 1.1em;
-    line-height: 1.7em;
-    text-align: justify
-}
-
-article .content {
-    padding-bottom: 2em
-}
-
-article footer {
-    padding: 1em 0;
-    border-bottom: 1px solid #dfdfdf;
-    border-top: 1px solid #dfdfdf
-}
-
-article h1,article h2,article h3 {
-    text-align: left
-}
-
-article h1 a,article h2 a,article h3 a {
-    color: #333
-}
-
-article h1 a:hover,article h2 a:hover,article h3 a:hover {
-    color: red
-}
-
-article header {
-    margin: 0 0 3em 0;
-    padding: 0;
-    border: 0px;
-    text-align: center
-}
-
-article header h1 {
-    font-size: 1.6em;
-    font-weight: normal;
-    font-style: normal;
-    line-height: 1.3em;
-    text-align: center
-}
-
-article header time {
-    font-size: 1em;
-    font-style: normal
-}
-
-article hr {
-    margin: 4em !important;
-    height: 1px;
-    border: none;
-    color: #dfdfdf;
-    background-color: #dfdfdf
-}
-
-article p .caption {
-    font-family: "sorts-mill-goudy-italic";
-    font-size: 0.9em
-}
-
-article p img {
-    max-width: 100%;
-    padding: 4px;
-    -webkit-box-shadow: 0 0 0px 1px #b0b0b0;
-    box-shadow: 0 0 0px 1px #b0b0b0
-}
-
-article p .word1,article p .word2,article p .word3 {
-    font-size: 1em;
-    font-variant: small-caps
 }
 
 .pagination {
