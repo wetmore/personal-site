@@ -12,5 +12,7 @@ interactive search features. I interned on the same team in the summer of 2014.
 For more information about my background as a developer, please see my [github 
 account](//github.com/wetmore) or my [CV](/cv.pdf).
 
+While I started university with the intention of leaving as a developer (which
+is what ended up happening), I fell in love with math in my third year of school and switched into the Math/CS major starting in my fourth. My main interests lie in logic and formal reasoning, particularly the application of modal logics to verifying the behaviour of transition systems. I am also interested in the interplay between program behaviour and category theory and logic.
 
-
+If you would like to reach me, shoot me an email at `[last name].matt@gmail.com`.

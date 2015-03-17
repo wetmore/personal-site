@@ -10,29 +10,19 @@ import qualified CssVars as CV
 import           CustomCompilers
 
 --------------------------------------------------------------------------------
+
+
 main :: IO ()
 main = hakyll $ do
-    match "images/*" $ do
-        route   idRoute
-        compile copyFileCompiler
-
     match "css/*" $ do
         route   idRoute
         compile $ compressCssCompiler >>= applyAsTemplate CV.defaultCtx
 
-    match "js/*" $ do
+    match (fromList ["images/*", "js/*", "font/*", "files/*", "cv.pdf"]) $ do
         route   idRoute
         compile copyFileCompiler
 
-    match "font/*" $ do
-        route   idRoute
-        compile copyFileCompiler
-
-    match "cv.pdf" $ do
-        route   idRoute
-        compile copyFileCompiler
-
-    match (fromList ["about.md", "contact.md"]) $ do
+    match (fromList ["about.md", "projects.md"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
