@@ -18,7 +18,23 @@ main = hakyll $ do
         route   idRoute
         compile $ compressCssCompiler >>= applyAsTemplate CV.defaultCtx
 
-    match (fromList ["images/*", "js/*", "font/*", "files/*", "cv.pdf"]) $ do
+    match "images/*" $ do
+        route   idRoute
+        compile copyFileCompiler
+
+    match "js/*" $ do
+        route   idRoute
+        compile copyFileCompiler
+
+    match "font/*" $ do
+        route   idRoute
+        compile copyFileCompiler
+
+    match "files/*" $ do
+        route   idRoute
+        compile copyFileCompiler
+
+    match "cv.pdf" $ do
         route   idRoute
         compile copyFileCompiler
 
@@ -32,6 +48,14 @@ main = hakyll $ do
         route $ setExtension "html"
         compile $ pandocMathCompiler
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
+            >>= loadAndApplyTemplate "templates/default.html" postCtx
+            >>= relativizeUrls
+
+    match "drafts/*" $ do
+        route $ setExtension "html"
+        compile $ pandocMathCompiler
+            >>= loadAndApplyTemplate "templates/post.html"    postCtx
+            >>= loadAndApplyTemplate "templates/draft.html"   postCtx
             >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls
 

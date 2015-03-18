@@ -28,6 +28,15 @@
 
         <div class="title"><h1>$title$</h1></div>
 
+        $if(date)$
+        <div class="info">
+            Posted on $date$
+            $if(author)$
+                by $author$
+            $endif$
+        </div>
+        $endif$
+
         <div id="content">
             $body$
         </div>
