@@ -20,13 +20,14 @@ function positionSidenotes() {
     children.forEach(function(li) {
       var noteNum = +li.id.substr(2);
       var ref = document.getElementById('fnref' + noteNum);
+      if (ref && li.offsetParent) {
+        var delta = ref.offsetTop - (li.offsetParent.offsetTop + li.offsetTop);
 
-      var delta = ref.offsetTop - (li.offsetParent.offsetTop + li.offsetTop);
-
-      if (isStart(noteNum)) { // reposition sidenote
-        li.style.marginTop = delta + "px";
-      } else { // reposition li
-        li.style.marginTop = delta + "px";
+        if (isStart(noteNum)) { // reposition sidenote
+          li.style.marginTop = delta + "px";
+        } else { // reposition li
+          li.style.marginTop = delta + "px";
+        }
       }
     });
   });
