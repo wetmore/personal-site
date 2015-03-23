@@ -8,6 +8,9 @@ import           Hakyll.Core.Compiler
 
 import qualified CssVars as CV
 import           CustomCompilers
+import           Collections
+
+
 
 --------------------------------------------------------------------------------
 
@@ -44,6 +47,8 @@ main = hakyll $ do
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
+    colls <- buildCollections "drafts/*" (fromCapture "collections/*.html")
+
     match "posts/*" $ do
         route $ setExtension "html"
         compile $ pandocMathCompiler
@@ -53,17 +58,23 @@ main = hakyll $ do
 
     match "drafts/*" $ do
         route $ setExtension "html"
-        compile $ pandocMathCompiler
-            >>= loadAndApplyTemplate "templates/post.html"    postCtx
-            >>= loadAndApplyTemplate "templates/draft.html"   postCtx
-            >>= loadAndApplyTemplate "templates/default.html" postCtx
-            >>= relativizeUrls
+        compile $ do
+            
+            let ctx = field "next" (nextUrl colls) `mappend`
+                      field "prev" (prevUrl colls) `mappend`
+                      postCtx
+            pandocMathCompiler
+                >>= loadAndApplyTemplate "templates/post.html"    ctx
+                >>= loadAndApplyTemplate "templates/draft.html"   ctx
+                >>= loadAndApplyTemplate "templates/default.html" ctx
+                >>= relativizeUrls
 
     create ["archive.html"] $ do
         route idRoute
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let archiveCtx =
+                    constField "test" (show $ map fst $ collMap colls)  `mappend`
                     listField "posts" postCtx (return posts) `mappend`
                     constField "title" "Archives"            `mappend`
                     defaultContext
@@ -96,5 +107,7 @@ postCtx :: Context String
 postCtx =
     dateField "date" "%B %e, %Y" `mappend`
     defaultContext
+
+----
 
     
