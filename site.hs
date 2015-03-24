@@ -59,10 +59,7 @@ main = hakyll $ do
     match "drafts/*" $ do
         route $ setExtension "html"
         compile $ do
-            
-            let ctx = field "next" (nextUrl colls) `mappend`
-                      field "prev" (prevUrl colls) `mappend`
-                      postCtx
+            let ctx = collectionContext colls `mappend` postCtx
             pandocMathCompiler
                 >>= loadAndApplyTemplate "templates/post.html"    ctx
                 >>= loadAndApplyTemplate "templates/draft.html"   ctx
@@ -74,7 +71,7 @@ main = hakyll $ do
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let archiveCtx =
-                    constField "test" (show $ map fst $ collMap colls)  `mappend`
+                    constField "test" (show $ map fst $ collMap colls) `mappend`
                     listField "posts" postCtx (return posts) `mappend`
                     constField "title" "Archives"            `mappend`
                     defaultContext

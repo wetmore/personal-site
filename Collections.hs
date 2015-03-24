@@ -1,8 +1,7 @@
 module Collections
     ( Collections (..)
     , buildCollections
-    , nextUrl
-    , prevUrl
+    , collectionContext
     ) where
 
 import           Hakyll
@@ -10,6 +9,8 @@ import           Control.Applicative (liftA2)
 import           Data.Ord (comparing)
 import           Data.List (elemIndex, insertBy)
 import           Control.Monad (foldM)
+import           Data.Maybe (fromMaybe)
+import           Data.Monoid (mconcat)
 import qualified Data.Map as M
 import qualified Data.Set as S
 
@@ -19,18 +20,7 @@ data Collections = Collections
     , collDependency :: Dependency
     } deriving (Show)
 
-getCollection :: MonadMetadata m => Identifier -> m String
-getCollection identifier = do
-    metadata <- getMetadata identifier
-    return $ maybe "" id $ M.lookup "collection" metadata
-
-getCollectionAndPos :: MonadMetadata m => Identifier -> m (Maybe (Int,String))
-getCollectionAndPos identifier = do
-    metadata <- getMetadata identifier
-    return $ do
-        coll <- M.lookup "collection" metadata
-        pos  <- M.lookup "part" metadata
-        return (read pos :: Int, coll)
+------ Building the collections map
 
 buildCollWith :: MonadMetadata m
               => (Identifier -> m (Maybe (Int, String)))
@@ -49,15 +39,14 @@ buildCollWith f pattern makeId = do
         let add (pos, coll) = insertCollEntryInOrder coll (pos, id') collMap
         return $ maybe collMap add maybeCollection
 
-
--- this can definitely be refactored
 insertCollEntryInOrder :: (Ord k, Ord a)
                        => k -> (a,b)
                        -> M.Map k [(a,b)] -> M.Map k [(a,b)]
-insertCollEntryInOrder key val oldMap = maybe (M.insert key [val] oldMap) id $ do
-    list <- M.lookup key oldMap
-    let newList = insertBy (comparing fst) val list
-    return $ M.insert key newList oldMap
+insertCollEntryInOrder key val oldMap = M.insert key newVal oldMap
+  where
+    newVal = maybe [val] id $ do
+      list <- M.lookup key oldMap
+      return $ insertBy (comparing fst) val list
 
 buildCollections :: MonadMetadata m
                  => Pattern
@@ -65,14 +54,29 @@ buildCollections :: MonadMetadata m
                  -> m Collections
 buildCollections = buildCollWith getCollectionAndPos
 
-offsetUrl :: MonadMetadata m => (Int -> Int) -> Collections -> Item a -> m FilePath
-offsetUrl f colls i = do
-    next <- offsetInCollection colls (itemIdentifier i) f
-    return $ maybe "" toFilePath next
+-- swap order of pos and collection to fit name
+getCollectionAndPos :: MonadMetadata m => Identifier -> m (Maybe (Int,String))
+getCollectionAndPos identifier = do
+    metadata <- getMetadata identifier
+    return $ do
+        coll <- M.lookup "collection" metadata
+        pos  <- M.lookup "part" metadata
+        return (read pos :: Int, coll)
 
-nextUrl, prevUrl :: MonadMetadata m => Collections -> Item a -> m FilePath
-nextUrl = offsetUrl (+1)
-prevUrl = offsetUrl (+(-1))
+--------------
+
+offsetUrl :: (Int -> Int) -- offset function
+          -> Collections
+          -> Item a
+          -> Compiler FilePath
+offsetUrl f colls i = 
+    (offsetInCollection colls (itemIdentifier i) f) >>= url
+      where
+        url Nothing    = fail $ "No next/prev page"
+        url (Just id') = (getRoute id') >>= process
+        
+        process Nothing   = fail $ "No URL for that page"
+        process (Just fp) = return $ toUrl fp
 
 offsetInCollection :: MonadMetadata m
                  => Collections
@@ -80,14 +84,19 @@ offsetInCollection :: MonadMetadata m
                  -> (Int -> Int)
                  -> m (Maybe Identifier)
 offsetInCollection colls identifier f = do
-    collection <- getCollection identifier
-    let postsInCollection = M.lookup collection $ M.fromList (collMap colls)
-    let next = do list  <- postsInCollection
-                  index <- elemIndex identifier list
-                  list `indexList` (f index)
-    return next
+    maybeCollection <- getCollectionAndPos identifier
+    return $ do
+      (pos, collection) <- maybeCollection
+      list <- M.lookup collection $ M.fromList (collMap colls)
+      list `indexList` (f $ pos - 1) -- Pos starts at 1
 
 indexList :: [a] -> Int -> Maybe a
 indexList xs n | n <  0         = Nothing
                | n >= length xs = Nothing
                | otherwise      = Just (xs !! n)
+
+collectionContext :: Collections -> Context String
+collectionContext colls = mconcat
+  [ field "nextInCollection" $ offsetUrl (+1)    colls
+  , field "prevInCollection" $ offsetUrl (+(-1)) colls
+  ]
