@@ -108,8 +108,7 @@ code {
 }
 
 .main-text {
-    /* margin-left: -220px; */
-    /* width: 700px; */
+    margin-top: 2em;
 }
 
 .sidenote {
@@ -143,6 +142,27 @@ ul.posts {
     color: #fb4f4f;
     margin: 1em auto;
     text-align: center;
+}
+
+.left {
+    float: left;
+}
+
+.collection-seek h5 {
+    text-align: center;
+    height: 0;
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.collection-seek {
+    text-align: right;
+    height: 1em;
+    font-size: 0.9em;
+}
+
+.title h1 {
+    margin-bottom: 2em;
 }
 
 /* Medium screens */
@@ -199,6 +219,11 @@ ul.posts {
 
     #footer {
         padding-right: 15px;
+    }
+
+    #footer .left {
+        float: left;
+        padding-left: 15px;
     }
 
     .main-text {

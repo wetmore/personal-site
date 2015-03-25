@@ -1,0 +1,22 @@
+<div class="collection-seek">
+$if(collection)$
+    <h5>Part $part$ in the collection $collection$</h5>
+$endif$
+$if(prevInCollection)$
+    <a href="$prevInCollection$" class="left">Previous in collection</a>
+$endif$
+$if(nextInCollection)$
+    <a href="$nextInCollection$">Next in collection</a>
+$endif$
+</div>
+
+$body$
+
+<div class="collection-seek">
+$if(prevInCollection)$
+    <a href="$prevInCollection$" class="left">Previous in collection</a>
+$endif$
+$if(nextInCollection)$
+    <a href="$nextInCollection$">Next in collection</a>
+$endif$
+</div>

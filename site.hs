@@ -62,6 +62,7 @@ main = hakyll $ do
             let ctx = collectionContext colls `mappend` postCtx
             pandocMathCompiler
                 >>= loadAndApplyTemplate "templates/post.html"    ctx
+                >>= loadAndApplyTemplate "templates/collectionInfo.html" ctx
                 >>= loadAndApplyTemplate "templates/draft.html"   ctx
                 >>= loadAndApplyTemplate "templates/default.html" ctx
                 >>= relativizeUrls
