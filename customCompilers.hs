@@ -26,10 +26,3 @@ customWriterCompilerWith :: (WriterOptions -> Pandoc -> IO String)
 customWriterCompilerWith customWriter ropt wopt = do
     pandoc <- readPandocWith ropt <$> getResourceBody
     withItemBody (unsafeCompiler . customWriter wopt) pandoc
-
-customWriterCompilerWith' :: (WriterOptions -> Pandoc -> IO String)
-                         -> ReaderOptions -> WriterOptions
-                         -> Compiler (Item String)
-customWriterCompilerWith' customWriter ropt wopt = 
-    (readPandocWith ropt <$> getResourceBody)
-        >>= withItemBody (unsafeCompiler . customWriter wopt)
