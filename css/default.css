@@ -90,7 +90,7 @@ h3 {
     display: block;
 }
 
-div.highlight {
+div.highlight, pre code {
     margin: 0 20px 0 20px;
     padding: 10px;
     background: #eee;
@@ -101,6 +101,16 @@ code {
    background: #eee;
    display: inline-block;
    padding: 2px;
+}
+
+.code-output {
+    margin: 0 40px 0 20px;
+    padding: 10px;
+    overflow: auto;
+}
+
+.code-output code {
+    background-color: inherit;
 }
 
 .highlight pre {
@@ -161,8 +171,9 @@ ul.posts {
     font-size: 0.9em;
 }
 
-.title h1 {
-    margin-bottom: 2em;
+.subtitle {
+    font-size: 1.0em;
+    margin-top: 0;
 }
 
 /* Medium screens */
@@ -229,5 +240,9 @@ ul.posts {
     .main-text {
         margin-left: 0;
         width: 100%;
+    }
+
+    .comments {
+        padding: 20px;
     }
 }

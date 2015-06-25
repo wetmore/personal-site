@@ -37,7 +37,13 @@
             <div class="bird"></div>
         </header>
 
-        <div class="title"><h1>$title$</h1></div>
+        <div class="title">
+            <h1>$title$</h1>
+        
+            $if(subtitle)$
+            <h1 class="subtitle">$subtitle$</h1>
+            $endif$
+        </div>
 
         $if(date)$
         <div class="info">
@@ -51,6 +57,26 @@
         <div id="content">
             $body$
         </div>
+
+        $if(comments)$
+        <div class="comments">
+        <h2>Comments</h2>
+        <div id="disqus_thread"></div>
+        </div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES * * */
+            var disqus_shortname = 'mattwetmore';
+            var disqus_identifier = '$url$';
+            var disqus_url = 'http://mattwetmore.me' + '$url$';
+            var disqus_title = '$title$';
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        $endif$
 
         <div id="footer">
             <span class="left"><a href="//github.com/wetmore/personal-site">Source</a>
