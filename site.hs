@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
-import           Data.Monoid (mappend)
+import           Data.Monoid (mappend, mconcat)
 import           Hakyll
 import qualified Data.Set as S
 import           Text.Pandoc
@@ -10,6 +10,8 @@ import qualified CssVars as CV
 import           CustomCompilers
 import           Collections
 
+import qualified Data.Map as M
+import Data.Maybe
 
 
 --------------------------------------------------------------------------------
@@ -28,6 +30,18 @@ main = hakyll $ do
     match "js/*" $ do
         route   idRoute
         compile copyFileCompiler
+
+    match "js/elm/elm.js" $ do
+        route   idRoute
+        compile copyFileCompiler
+
+    match "where.html" $ do
+        route   idRoute
+        compile $ do
+            getResourceBody
+                >>= applyAsTemplate headContext
+                >>= loadAndApplyTemplate "templates/default.html" headContext
+                >>= relativizeUrls
 
     match "font/*" $ do
         route   idRoute
@@ -72,7 +86,7 @@ main = hakyll $ do
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let archiveCtx =
-                    constField "test" (show $ map fst $ collMap colls) `mappend`
+                    --listField "collections" collectionContext (map snd $ collMap colls) `mappend`
                     listField "posts" postCtx (return posts) `mappend`
                     constField "title" "Archives"            `mappend`
                     defaultContext
@@ -89,7 +103,7 @@ main = hakyll $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let indexCtx =
                     listField "posts" postCtx (return posts) `mappend`
-                    constField "title" "Home"                `mappend`
+                    --constField "title" "Home"                `mappend`
                     defaultContext
 
             getResourceBody
@@ -101,6 +115,8 @@ main = hakyll $ do
 
 
 --------------------------------------------------------------------------------
+
+
 postCtx :: Context String
 postCtx =
     dateField "date" "%B %e, %Y" `mappend`
@@ -108,4 +124,14 @@ postCtx =
 
 ----
 
-    
+headContext = mconcat [ parseListMetadata "scripts"
+                      , parseListMetadata "styles"
+                      , defaultContext 
+                      ]
+
+parseListMetadata :: String -> Context a
+parseListMetadata s = listField s defaultContext $ do
+    identifier <- getUnderlying
+    metadata <- getMetadata identifier
+    let metas = maybe [] (map trim . splitAll ",") $ M.lookup s metadata
+    return $ map (\x -> Item (fromFilePath x) x) metas

@@ -22,6 +22,16 @@
         <script type="text/javascript"
         src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script src="/js/mathjaxConfig.js"></script>
+        $if(scripts)$
+        $for(scripts)$
+            <script src="$body$"></script>
+        $endfor$
+        $endif$
+        $if(styles)$
+        $for(styles)$
+            <link rel="stylesheet" type="text/css" href="$body$" />
+        $endfor$
+        $endif$
     </head>
     <body>
 
@@ -34,7 +44,7 @@
                 <a href="/projects.html">Projects</a>
                 <a href="/archive.html">Archive</a>
             </div>
-            <div class="bird"></div>
+            <a href="/where.html"><div class="bird"></div></a>
         </header>
 
         <div class="title">
