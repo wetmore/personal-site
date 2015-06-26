@@ -4,3 +4,4 @@ dist/
 _cache
 _site
 *.hi
+js/elm/elm-stuff
