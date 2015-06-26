@@ -20,9 +20,11 @@ pandocMathCompiler =
 sidenoteCompilerWith :: ReaderOptions -> WriterOptions -> Compiler (Item String)
 sidenoteCompilerWith = customWriterCompilerWith $ writeCustom "sidenote.lua"
 
+
 customWriterCompilerWith :: (WriterOptions -> Pandoc -> IO String)
                          -> ReaderOptions -> WriterOptions
                          -> Compiler (Item String)
 customWriterCompilerWith customWriter ropt wopt = do
-    pandoc <- readPandocWith ropt <$> getResourceBody
+    body <- getResourceBody
+    pandoc <- readPandocWith ropt body
     withItemBody (unsafeCompiler . customWriter wopt) pandoc
